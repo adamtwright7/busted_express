@@ -1,25 +1,15 @@
-'use strict';
+const express = require("express")
+const app = express()
+const PORT = 3033
 
-const hostname = '127.0.0.1';
-const port = 3333;
+// middleware 
+// app.use(express.static(__dirname + "/routes"))
+app.set("view engine","ejs")
 
-const express = require('express'),
-    es6Renderer = require('express-es6-template-engine');
-
-const app = express();
-
-app.engine('html', es6Renderer);
-app.set('views', './views');
-app.set('view engine', 'html');
-
-const server = http.createServer(app);
-
-server.listen(PORT, HOSTNAME, () => {
-    console.log(`Server running at http://${hostname}:${port}`)
-});
+app.listen(PORT, console.log(`Listening on port ${PORT}.`))
 
 const rootController = require('./routes/index');
 const rangersController = require('./routes/rangers');
 
-
+app.use('/',rootController)
 app.use('/rangers', rangersController);
